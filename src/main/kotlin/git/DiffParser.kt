@@ -12,9 +12,12 @@ class DiffParser {
 	/**
 	 * Parses the diff.
 	 *
+	 * THIS CURRENTLY DOES NOT WORK
+	 *
 	 * @param diff The diff to parse
 	 * @return The filepath and a Map in the form of {lineNum: text}. Should this be a class?
 	 */
+	// TODO: Fix this
 	@Throws(ParsingException::class)
 	fun parse(diff: String): Pair<String, Map<Int, String>> {
 		// We don't need subtractions or the name of the file on two lines.
