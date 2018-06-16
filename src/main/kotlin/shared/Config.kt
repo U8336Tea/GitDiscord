@@ -10,7 +10,5 @@ object Config {
 	 * @param key The key for the setting
 	 * @return The value for the key
 	 */
-	operator fun get(key: String): Any? {
-		return System.getenv(key)
-	}
+	operator fun get(key: String): Any? = System.getenv(key)
 }
