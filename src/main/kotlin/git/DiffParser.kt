@@ -1,6 +1,7 @@
 package git
 
 import java.util.regex.Pattern
+import git.exceptions.ParsingException
 
 /**
  * Parses the output of git diff in order to edit a file.
@@ -24,12 +25,14 @@ class DiffParser {
 
 		for (line in lines) {
 			when {
-				line.startsWith("+++") -> // TODO: Get a better exception.
-					filepath = getFilepath(line) ?: throw Exception("An error occurred.")
-				line.startsWith("@@") -> // TODO: Get a better exception.
-					currentLine = getLineNumber(line) ?: throw Exception("An error occurred.")
-				line.startsWith("+") -> // TODO: Get a better exception.
-					changes[currentLine ?: throw Exception("An error occurred.")] = line.drop(1)
+				line.startsWith("+++") ->
+					filepath = getFilepath(line) ?: throw ParsingException("An error occurred.")
+				line.startsWith("@@") ->
+					currentLine = getLineNumber(line)
+							?: throw ParsingException("An error occurred.")
+				line.startsWith("+") ->
+					changes[currentLine ?: throw ParsingException("An error occurred.")] =
+							line.drop(1)
 			}
 
 			if (currentLine != null) currentLine++
