@@ -22,7 +22,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 	compile "com.discord4j:Discord4J:2.10.1"
-	compile "com.jcabi:jcabi-github:0.39"
+	compile "org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5"
 }
 
 compileKotlin {
