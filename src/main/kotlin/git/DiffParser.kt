@@ -17,12 +17,12 @@ class DiffParser {
 	 * @param diff The diff to parse
 	 * @return The filepath and a Map in the form of {lineNum: text}. Should this be a class?
 	 */
-	// TODO: Fix this
+	// FIXME: This function
 	@Throws(ParsingException::class)
 	fun parse(diff: String): Pair<String, Map<Int, String>> {
 		// We don't need subtractions or the name of the file on two lines.
 		val lines = diff.lines().filterNot { it.startsWith("-") }
-		// TODO: This may cause errors later on.
+		// FIXME: This may cause errors later on.
 		var filepath = ""
 		val changes = hashMapOf<Int, String>()
 		var currentLine: Int? = null
