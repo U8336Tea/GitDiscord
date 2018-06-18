@@ -55,7 +55,8 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 		val repositoryService = RepositoryService()
 		val commitService = CommitService()
 		val repository = repositoryService.getRepository(repo)
-		val currentCommit = commitService.getCommit(repository, repositoryContents.sha)
+		val branch = repositoryService.getBranches(repo).first()
+		val currentCommit = commitService.getCommit(repository, branch.commit.sha)
 		val tree = dataService.getTree(repo, currentCommit.sha)
 
 		val commit = Commit()
