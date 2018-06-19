@@ -8,7 +8,7 @@ import org.eclipse.egit.github.core.service.ContentsService
 import org.eclipse.egit.github.core.service.DataService
 import org.eclipse.egit.github.core.service.RepositoryService
 
-// Some help from https://gist.github.com/Detelca/2337731
+// Strongly influenced by and suspiciously similar to https://gist.github.com/Detelca/2337731
 
 /**
  * A file in a repo. Wrapper for RepositoryContents.
