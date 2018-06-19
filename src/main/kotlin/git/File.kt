@@ -72,7 +72,9 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 		treeEntry.size = contents.length.toLong()
 		treeEntry.type = TreeEntry.TYPE_BLOB
 
-		dataService.createTree(repo, arrayListOf(treeEntry), tree.sha)
+		val newTree = dataService.createTree(repo, arrayListOf(treeEntry), tree.sha)
+		commit.tree = newTree
+
 		dataService.createCommit(repo, commit)
 	}
 }
