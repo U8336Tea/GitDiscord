@@ -75,12 +75,12 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 		val newTree = dataService.createTree(repo, arrayListOf(treeEntry), tree.sha)
 		commit.tree = newTree
 
-		dataService.createCommit(repo, commit)
+		val newCommit = dataService.createCommit(repo, commit)
 
 		val resource = TypedResource()
 		resource.type = TypedResource.TYPE_COMMIT
-		resource.sha = commit.sha
-		resource.url = commit.url
+		resource.sha = newCommit.sha
+		resource.url = newCommit.url
 
 		val reference = dataService.getReference(repo, "heads/master")
 		reference.`object` = resource
