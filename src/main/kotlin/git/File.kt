@@ -84,6 +84,6 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 
 		val reference = dataService.getReference(repo, "heads/master")
 		reference.`object` = resource
-		dataService.editReference(repo, reference)
+		dataService.editReference(repo, reference, true)
 	}
 }
