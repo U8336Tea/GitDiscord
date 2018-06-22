@@ -11,6 +11,7 @@ object Config {
 
 	object Discord {
 		val key get() = Config["discord_token"] as String
+		val ownerID get() = Config["discord_owner"] as String?
 	}
 
 	/**
