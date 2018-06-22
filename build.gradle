@@ -23,7 +23,9 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
 	compile "net.dv8tion:JDA:3.6.0_376"
-	compile "com.jagrosh:JDA-Utilities:2.1.1"
+	compile "com.jagrosh:jda-utilities:2.1.1"
+	def jdaUtilitiesModules = ["command", "doc"]
+	for (name in jdaUtilitiesModules) compile "com.jagrosh:jda-utilities-$name:2.1.1"
 
 	compile "org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5"
 }
