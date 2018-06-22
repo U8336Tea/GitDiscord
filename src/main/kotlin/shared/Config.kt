@@ -4,6 +4,15 @@ package shared
  * Configuration settings for the program
  */
 object Config {
+	object GitHub {
+		val username get() = Config["github_username"]
+		val password get() = Config["github_password"]
+	}
+
+	object Discord {
+		val key get() = Config["discord_token"]
+	}
+
 	/**
 	 * Get a setting
 	 *
