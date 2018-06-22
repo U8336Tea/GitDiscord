@@ -5,12 +5,12 @@ package shared
  */
 object Config {
 	object GitHub {
-		val username get() = Config["github_username"]
-		val password get() = Config["github_password"]
+		val username get() = Config["github_username"] as String
+		val password get() = Config["github_password"] as String
 	}
 
 	object Discord {
-		val key get() = Config["discord_token"]
+		val key get() = Config["discord_token"] as String
 	}
 
 	/**
