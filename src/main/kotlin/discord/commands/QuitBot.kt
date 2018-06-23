@@ -11,6 +11,7 @@ class QuitBot: Command() {
 	}
 
 	override fun execute(event: CommandEvent) {
+		event.reply("Quitting!")
 		System.exit(0)
 	}
 }
