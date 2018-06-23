@@ -12,6 +12,7 @@ fun main(args: Array<String>) {
 			.setPrefix("!")
 			.setOwnerId(Config.Discord.ownerID)
 			.addCommand(QuitBot())
+			.addCommand(Ping())
 			.build()
 
 	val bot = JDABuilder(AccountType.BOT)
