@@ -10,6 +10,7 @@ import shared.Config
 fun main(args: Array<String>) {
 	val discordClient = CommandClientBuilder()
 			.setPrefix("!")
+			.setAlternativePrefix(".")
 			.setOwnerId(Config.Discord.ownerID)
 			.addCommand(QuitBot())
 			.addCommand(Ping())
