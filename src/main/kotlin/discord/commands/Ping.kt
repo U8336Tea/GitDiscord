@@ -3,7 +3,7 @@ package discord.commands
 import com.jagrosh.jdautilities.command.Command
 import com.jagrosh.jdautilities.command.CommandEvent
 
-class Ping: Command() {
+class Ping : Command() {
 	init {
 		name = "ping"
 		help = "Responds \"Pong!\"."

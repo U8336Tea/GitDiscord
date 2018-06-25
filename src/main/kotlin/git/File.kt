@@ -25,16 +25,18 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 	/**
 	 * The contents of the file at [path].
 	 */
-	var contents: String get() {
-		// Decoder doesn't like whitespace
-		val content = repositoryContents.content.filterNot { it.isWhitespace() }
-		val decoder = Base64.getDecoder()
-		val decoded = decoder.decode(content)
+	var contents: String
+		get() {
+			// Decoder doesn't like whitespace
+			val content = repositoryContents.content.filterNot { it.isWhitespace() }
+			val decoder = Base64.getDecoder()
+			val decoded = decoder.decode(content)
 
-		return decoded.map { it.toChar() }.joinToString("")
-	} set(value) {
-		_contents = value
-	}
+			return decoded.map { it.toChar() }.joinToString("")
+		}
+		set(value) {
+			_contents = value
+		}
 
 	/**
 	 * Commits the file.

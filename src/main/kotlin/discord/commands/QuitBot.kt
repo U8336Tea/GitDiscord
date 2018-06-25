@@ -3,7 +3,7 @@ package discord.commands
 import com.jagrosh.jdautilities.command.Command
 import com.jagrosh.jdautilities.command.CommandEvent
 
-class QuitBot: Command() {
+class QuitBot : Command() {
 	init {
 		name = "quit"
 		aliases = arrayOf("quitbot")

@@ -1,4 +1,4 @@
 package git.exceptions
 
 // TODO: Better name?
-class ParsingException(reason: String): Exception(reason)
+class ParsingException(reason: String) : Exception(reason)
