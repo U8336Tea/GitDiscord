@@ -20,6 +20,7 @@ import org.eclipse.egit.github.core.service.RepositoryService
 class File(private val client: GitHubClient, val path: String, val repo: IRepositoryIdProvider) {
 	private val dataService = DataService(client)
 	private val repositoryContents = ContentsService().getContents(repo, path)[0]
+	private var _contents = contents
 
 	/**
 	 * The contents of the file at [path].
@@ -32,18 +33,15 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 
 		return decoded.map { it.toChar() }.joinToString("")
 	} set(value) {
-		updateContents(value)
+		_contents = value
 	}
 
 	/**
-	 * Updates the contents of the file.
-	 *
-	 * @param contents The new contents of the file.
+	 * Commits the file.
 	 */
-	// TODO: Should this be a setter? Both now to be sure.
-	fun updateContents(contents: String) {
+	fun commit() {
 		val blob = Blob()
-		blob.content = contents
+		blob.content = _contents
 
 		val sha = dataService.createBlob(repo, blob)
 
@@ -69,7 +67,7 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 		treeEntry.mode = TreeEntry.MODE_BLOB
 		treeEntry.path = path
 		treeEntry.sha = sha
-		treeEntry.size = contents.length.toLong()
+		treeEntry.size = _contents.length.toLong()
 		treeEntry.type = TreeEntry.TYPE_BLOB
 
 		val newTree = dataService.createTree(repo, arrayListOf(treeEntry), tree.sha)
