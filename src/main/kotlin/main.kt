@@ -14,6 +14,7 @@ fun main(args: Array<String>) {
 			.setOwnerId(Config.Discord.ownerID)
 			.addCommand(QuitBot())
 			.addCommand(Ping())
+			.addCommand(Commit())
 			.build()
 
 	val bot = JDABuilder(AccountType.BOT)
