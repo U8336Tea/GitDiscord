@@ -22,5 +22,6 @@ class Commit : Command() {
 		}
 
 		Commit.current.commit(message)
+		event.reply("Committed.")
 	}
 }
