@@ -9,7 +9,7 @@ class Commit : Command() {
 	init {
 		name = "commit"
 		help = "Commits the changes"
-		arguments = "<event>"
+		arguments = "<message>"
 	}
 
 	override fun execute(event: CommandEvent) {
