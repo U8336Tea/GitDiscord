@@ -40,8 +40,10 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 
 	/**
 	 * Commits the file.
+	 *
+	 * @param message The commit message
 	 */
-	fun commit() {
+	fun commit(message: String) {
 		val blob = Blob()
 		blob.content = _contents
 
@@ -62,7 +64,7 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 		val commit = Commit()
 		commit.author = user
 		commit.committer = user
-		commit.message = "Bot commit"
+		commit.message = message
 		commit.sha = sha
 
 		val treeEntry = TreeEntry()
