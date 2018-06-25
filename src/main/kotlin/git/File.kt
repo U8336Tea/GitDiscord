@@ -21,7 +21,7 @@ import org.eclipse.egit.github.core.service.RepositoryService
 class File(private val client: GitHubClient, val path: String, val repo: IRepositoryIdProvider) {
 	private val dataService = DataService(client)
 	private val repositoryContents = ContentsService().getContents(repo, path)[0]
-	private var _contents = contents
+	private var _contents = this.contents
 
 	/**
 	 * The contents of the file at [path].
@@ -29,14 +29,14 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 	var contents: String
 		get() {
 			// Decoder doesn't like whitespace
-			val content = repositoryContents.content.filterNot { it.isWhitespace() }
+			val content = this.repositoryContents.content.filterNot { it.isWhitespace() }
 			val decoder = Base64.getDecoder()
 			val decoded = decoder.decode(content)
 
 			return decoded.map { it.toChar() }.joinToString("")
 		}
 		set(value) {
-			_contents = value
+			this._contents = value
 		}
 
 	/**
@@ -46,21 +46,21 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 	 */
 	fun commit(message: String) {
 		val blob = Blob()
-		blob.content = _contents
+		blob.content = this._contents
 
-		val sha = dataService.createBlob(repo, blob)
+		val sha = this.dataService.createBlob(repo, blob)
 
 		val user = CommitUser()
-		user.name = client.user
+		user.name = this.client.user
 		user.date = Date()
 		user.email = "something"
 
 		val repositoryService = RepositoryService()
 		val commitService = CommitService()
-		val repository = repositoryService.getRepository(repo)
-		val branch = repositoryService.getBranches(repo).first()
+		val repository = repositoryService.getRepository(this.repo)
+		val branch = repositoryService.getBranches(this.repo).first()
 		val currentCommit = commitService.getCommit(repository, branch.commit.sha)
-		val tree = dataService.getTree(repo, currentCommit.sha)
+		val tree = dataService.getTree(this.repo, currentCommit.sha)
 
 		val commit = Commit()
 		commit.author = user
@@ -70,23 +70,23 @@ class File(private val client: GitHubClient, val path: String, val repo: IReposi
 
 		val treeEntry = TreeEntry()
 		treeEntry.mode = TreeEntry.MODE_BLOB
-		treeEntry.path = path
+		treeEntry.path = this.path
 		treeEntry.sha = sha
-		treeEntry.size = _contents.length.toLong()
+		treeEntry.size = this._contents.length.toLong()
 		treeEntry.type = TreeEntry.TYPE_BLOB
 
-		val newTree = dataService.createTree(repo, arrayListOf(treeEntry), tree.sha)
+		val newTree = this.dataService.createTree(this.repo, arrayListOf(treeEntry), tree.sha)
 		commit.tree = newTree
 
-		val newCommit = dataService.createCommit(repo, commit)
+		val newCommit = this.dataService.createCommit(this.repo, commit)
 
 		val resource = TypedResource()
 		resource.type = TypedResource.TYPE_COMMIT
 		resource.sha = newCommit.sha
 		resource.url = newCommit.url
 
-		val reference = dataService.getReference(repo, "heads/master")
+		val reference = this.dataService.getReference(this.repo, "heads/master")
 		reference.`object` = resource
-		dataService.editReference(repo, reference, true)
+		dataService.editReference(this.repo, reference, true)
 	}
 }

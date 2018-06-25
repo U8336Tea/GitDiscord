@@ -5,9 +5,9 @@ import com.jagrosh.jdautilities.command.CommandEvent
 
 class QuitBot : Command() {
 	init {
-		name = "quit"
-		aliases = arrayOf("quitbot")
-		help = "Quits the bot."
+		this.name = "quit"
+		this.aliases = arrayOf("quitbot")
+		this.help = "Quits the bot."
 	}
 
 	override fun execute(event: CommandEvent) {

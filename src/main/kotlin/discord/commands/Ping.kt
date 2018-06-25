@@ -5,8 +5,8 @@ import com.jagrosh.jdautilities.command.CommandEvent
 
 class Ping : Command() {
 	init {
-		name = "ping"
-		help = "Responds \"Pong!\"."
+		this.name = "ping"
+		this.help = "Responds \"Pong!\"."
 	}
 
 	override fun execute(event: CommandEvent) {

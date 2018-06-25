@@ -7,9 +7,9 @@ import git.Commit
 
 class Commit : Command() {
 	init {
-		name = "commit"
-		help = "Commits the changes"
-		arguments = "<message>"
+		this.name = "commit"
+		this.help = "Commits the changes"
+		this.arguments = "<message>"
 	}
 
 	override fun execute(event: CommandEvent) {
